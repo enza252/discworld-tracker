@@ -16,8 +16,12 @@ const sagas = [
     Saga.TIFFANY_ACHING_AND_NAC_MAC_FEEGLEs
 ]
 
+type SidePanelProps = {
+    handleOrderByClick: Function
+    selected?: string
+}
 
-const SidePanel: React.FunctionComponent = () => {
+const SidePanel: React.FunctionComponent<SidePanelProps> = ({ handleOrderByClick, selected }) => {
     return (
         <Box sx={{ display: 'flex' }}>
             <Drawer
@@ -33,19 +37,21 @@ const SidePanel: React.FunctionComponent = () => {
                 anchor="left"
             >
                 <List>
-                    <ListItem>
-                        <ListItemText>
-                            View by Publication Order
-                        </ListItemText>
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => handleOrderByClick()} disabled={!selected}>
+                            <ListItemText primary="View by Publication Date" />
+                        </ListItemButton>
                     </ListItem>
                     <ListItem>
                         <ListItemText>
-                            View by Saga:
+                            <Typography sx={{ fontSize: 14 }} color="text.secondary">
+                                View by Saga:
+                            </Typography>
                         </ListItemText>
                     </ListItem>
                     {sagas.map((saga) => (
                         <ListItem key={saga} disablePadding>
-                            <ListItemButton>
+                            <ListItemButton onClick={() => handleOrderByClick(saga)} disabled={saga === selected}>
                                 <ListItemText primary={saga} />
                             </ListItemButton>
                         </ListItem>
