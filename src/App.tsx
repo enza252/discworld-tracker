@@ -1,4 +1,4 @@
-import { AppPage } from "./components/AppPage/AppPage";
+import { AppPage } from "./components/AppPage";
 
 const App = () => {
   return (
