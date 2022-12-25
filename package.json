@@ -26,7 +26,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "yarn run prettier --write ."
+    "lint": "yarn run prettier --check .",
+    "lint:fix": "yarn run prettier --write ."
   },
   "eslintConfig": {
     "extends": [
