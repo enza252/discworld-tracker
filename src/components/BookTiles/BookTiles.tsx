@@ -1,46 +1,48 @@
 import React from "react"
 import { books } from "../../data"
 import { Book } from "../../types";
-import { Card, CardContent, Grid, Button, Typography } from "@mui/material";
+import { Card, CardContent, Grid, Button, Typography, CardHeader } from "@mui/material";
 import { makeStyles } from '@mui/styles';
+import clsx from "clsx"
 
 const useStyles = makeStyles(() => ({
     root: {
         width: "100%",
         height: "100%"
+    },
+    selected: {
+        backgroundColor: "#44CF6C"
     }
 }))
 
 type BookTilesProps = {
-    filter?: string
+    filter?: string,
+    handleTileClick: Function,
+    selected?: string[]
 }
 
-
-const BookTiles: React.FunctionComponent<BookTilesProps> = ({ filter }) => {
+const BookTiles: React.FunctionComponent<BookTilesProps> = ({ handleTileClick, filter, selected }) => {
     const classes = useStyles()
-
     const renderTiles = (books: Book[]) => {
         return books.map(book => (
             <Grid item xs={2} key={book.id}>
-                <Button className={classes.root}>
-                    <Card className={classes.root}>
+                <Button className={classes.root} onClick={() => handleTileClick(book.id)}>
+                    <Card className={clsx(classes.root, selected?.includes(book.id) ? classes.selected : null)}>
+                        <CardHeader title={<Typography sx={{ fontWeight: "bold" }}>
+                            {book.title}
+                        </Typography>}>
+                        </CardHeader>
                         <CardContent>
-                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                Title:
-                            </Typography>
-                            <Typography sx={{ fontWeight: "bold" }}>
-                                {book.title}
-                            </Typography>
-                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                            <Typography sx={{ fontSize: 14 }} color="text.secondary">
                                 Saga:
                             </Typography>
-                            <Typography sx={{ fontWeight: "bold" }}>
+                            <Typography sx={{ fontWeight: "bold" }} gutterBottom>
                                 {book.saga}
                             </Typography>
-                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                            <Typography sx={{ fontSize: 14 }} color="text.secondary">
                                 Publication Order:
                             </Typography>
-                            <Typography>
+                            <Typography gutterBottom>
                                 {book.publicationOrder}
                             </Typography>
                         </CardContent>

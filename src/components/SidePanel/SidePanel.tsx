@@ -18,10 +18,10 @@ const sagas = [
 
 type SidePanelProps = {
     handleOrderByClick: Function
-    selected?: string
+    filter?: string
 }
 
-const SidePanel: React.FunctionComponent<SidePanelProps> = ({ handleOrderByClick, selected }) => {
+const SidePanel: React.FunctionComponent<SidePanelProps> = ({ handleOrderByClick, filter }) => {
     return (
         <Box sx={{ display: 'flex' }}>
             <Drawer
@@ -38,7 +38,7 @@ const SidePanel: React.FunctionComponent<SidePanelProps> = ({ handleOrderByClick
             >
                 <List>
                     <ListItem disablePadding>
-                        <ListItemButton onClick={() => handleOrderByClick()} disabled={!selected}>
+                        <ListItemButton onClick={() => handleOrderByClick()} disabled={!filter}>
                             <ListItemText primary="View by Publication Date" />
                         </ListItemButton>
                     </ListItem>
@@ -51,7 +51,7 @@ const SidePanel: React.FunctionComponent<SidePanelProps> = ({ handleOrderByClick
                     </ListItem>
                     {sagas.map((saga) => (
                         <ListItem key={saga} disablePadding>
-                            <ListItemButton onClick={() => handleOrderByClick(saga)} disabled={saga === selected}>
+                            <ListItemButton onClick={() => handleOrderByClick(saga)} disabled={saga === filter}>
                                 <ListItemText primary={saga} />
                             </ListItemButton>
                         </ListItem>
