@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
     height: "100%",
   },
   selected: {
-    border: "2px solid #44CF6C",
+    border: "1px solid #44CF6C",
   },
 }))
 
