@@ -53,6 +53,7 @@ const SidePanel: React.FunctionComponent<SidePanelProps> = ({
             <ListItemButton
               onClick={() => handleOrderByClick()}
               disabled={!filter}
+              data-testid="view-by-publication-date"
             >
               <ListItemText primary="View by Publication Date" />
             </ListItemButton>
@@ -69,6 +70,7 @@ const SidePanel: React.FunctionComponent<SidePanelProps> = ({
               <ListItemButton
                 onClick={() => handleOrderByClick(saga)}
                 disabled={saga === filter}
+                data-testid={`${saga}-filter`}
               >
                 <ListItemText primary={saga} />
               </ListItemButton>
