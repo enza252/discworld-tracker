@@ -1,9 +1,7 @@
-import { AppPage } from "./components/AppPage";
+import { AppPage } from "./components/AppPage"
 
 const App = () => {
-  return (
-    <AppPage />
-  );
+  return <AppPage />
 }
 
-export default App;
+export default App
