@@ -21,6 +21,7 @@ const AppPage: React.FunctionComponent = () => {
     ) {
       setSelected(cookies.discworldTracker)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleOrderByClick = (saga: string) => {
