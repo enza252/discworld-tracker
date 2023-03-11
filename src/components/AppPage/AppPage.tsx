@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { FunctionComponent, useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 import { books } from "../../data"
 
@@ -8,12 +8,12 @@ import { SidePanel } from "../SidePanel"
 
 import { DISCWORLD_TRACKER_COOKIE_NAME } from "../../constants"
 
-const AppPage: React.FunctionComponent = () => {
+const AppPage: FunctionComponent = () => {
   const [filter, setFilter] = useState<string>("")
   const [selected, setSelected] = useState<string[]>([])
   const [cookies, setCookie] = useCookies([DISCWORLD_TRACKER_COOKIE_NAME])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       selected.length === 0 &&
       cookies.discworldTracker &&
@@ -21,7 +21,7 @@ const AppPage: React.FunctionComponent = () => {
     ) {
       setSelected(cookies.discworldTracker)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleOrderByClick = (saga: string) => {

@@ -1,4 +1,4 @@
-import React from "react"
+import { FunctionComponent } from "react"
 import { Book } from "../../types"
 import {
   Card,
@@ -28,7 +28,7 @@ type BookTilesProps = {
   selected?: string[]
 }
 
-const BookTiles: React.FunctionComponent<BookTilesProps> = ({
+const BookTiles: FunctionComponent<BookTilesProps> = ({
   books,
   handleTileClick,
   filter,
