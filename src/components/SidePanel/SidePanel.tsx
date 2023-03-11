@@ -1,4 +1,4 @@
-import React from "react"
+import { FunctionComponent } from "react"
 
 import {
   Divider,
@@ -30,7 +30,7 @@ type SidePanelProps = {
   filter?: string
 }
 
-const SidePanel: React.FunctionComponent<SidePanelProps> = ({
+const SidePanel: FunctionComponent<SidePanelProps> = ({
   handleOrderByClick,
   filter,
 }) => {

@@ -1,11 +1,28 @@
-import React, { useState } from "react"
-import { Box, Grid } from "@mui/material"
+import { FunctionComponent, useEffect, useState } from "react"
+import { useCookies } from "react-cookie"
+import { books } from "../../data"
+
+import { Box, Button, Grid } from "@mui/material"
 import { BookTiles } from "../BookTiles"
 import { SidePanel } from "../SidePanel"
 
-const AppPage: React.FunctionComponent = () => {
+import { DISCWORLD_TRACKER_COOKIE_NAME } from "../../constants"
+
+const AppPage: FunctionComponent = () => {
   const [filter, setFilter] = useState<string>("")
   const [selected, setSelected] = useState<string[]>([])
+  const [cookies, setCookie] = useCookies([DISCWORLD_TRACKER_COOKIE_NAME])
+
+  useEffect(() => {
+    if (
+      selected.length === 0 &&
+      cookies.discworldTracker &&
+      cookies.discworldTracker.length > 0
+    ) {
+      setSelected(cookies.discworldTracker)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleOrderByClick = (saga: string) => {
     if (!saga) {
@@ -21,6 +38,7 @@ const AppPage: React.FunctionComponent = () => {
       setSelected(selected.filter((s) => s !== id))
     }
   }
+
   return (
     <Box sx={{ flexGrow: 1, minWidth: "100%", minHeight: "100%" }}>
       <Grid container>
@@ -28,11 +46,32 @@ const AppPage: React.FunctionComponent = () => {
           <SidePanel handleOrderByClick={handleOrderByClick} filter={filter} />
         </Grid>
         <Grid item xs={10}>
-          <BookTiles
-            filter={filter}
-            handleTileClick={handleTileClick}
-            selected={selected}
-          />
+          <Grid item xs={12}>
+            <Grid container justifyContent="flex-end">
+              <Button
+                variant="contained"
+                onClick={() =>
+                  setCookie(DISCWORLD_TRACKER_COOKIE_NAME, selected, {
+                    path: "/",
+                  })
+                }
+                disabled={
+                  selected.length === 0 ||
+                  cookies?.discworldTracker?.sort() === selected.sort()
+                }
+              >
+                Save
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <BookTiles
+              books={books}
+              filter={filter}
+              handleTileClick={handleTileClick}
+              selected={selected}
+            />
+          </Grid>
         </Grid>
       </Grid>
     </Box>

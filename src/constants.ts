@@ -1,0 +1,3 @@
+const DISCWORLD_TRACKER_COOKIE_NAME = "discworldTracker"
+
+export { DISCWORLD_TRACKER_COOKIE_NAME }

@@ -1,5 +1,4 @@
-import React from "react"
-import { books } from "../../data"
+import { FunctionComponent } from "react"
 import { Book } from "../../types"
 import {
   Card,
@@ -23,12 +22,14 @@ const useStyles = makeStyles(() => ({
 }))
 
 type BookTilesProps = {
-  filter?: string
+  books: Book[]
   handleTileClick: Function
+  filter?: string
   selected?: string[]
 }
 
-const BookTiles: React.FunctionComponent<BookTilesProps> = ({
+const BookTiles: FunctionComponent<BookTilesProps> = ({
+  books,
   handleTileClick,
   filter,
   selected,

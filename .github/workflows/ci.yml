@@ -24,16 +24,16 @@ jobs:
 
       - name: Install
         run: |
-          yarn install
+          make install
 
       - name: Lint
         run: |
-          yarn lint
+          make qa
 
       - name: Test
         run: |
-          yarn test
+          make test
 
       - name: Build
         run: |
-          yarn build
+          make build
