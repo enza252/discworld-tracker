@@ -31,7 +31,7 @@ const AppPage: FunctionComponent = () => {
       setFilter("")
     }
     setFilter(saga)
-    setShowSidePanel(false)
+    closeSidePanel()
   }
 
   const handleTileClick = (id: string) => {
@@ -46,14 +46,19 @@ const AppPage: FunctionComponent = () => {
     setShowSidePanel(!showSidePanel)
   }
 
-  const handleKeyDown = (event: React.KeyboardEvent | React.MouseEvent) => {
+  const closeSidePanel = () => {
+    setShowSidePanel(false)
+  }
+
+  const handleCloseEvent = (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
       event.type === "keydown" &&
       ((event as React.KeyboardEvent).key === "Tab" ||
         (event as React.KeyboardEvent).key === "Shift")
     ) {
-      setShowSidePanel(false)
+      closeSidePanel()
     }
+    closeSidePanel()
   }
 
   return (
@@ -63,7 +68,7 @@ const AppPage: FunctionComponent = () => {
           handleOrderByClick={handleOrderByClick}
           filter={filter}
           open={showSidePanel}
-          handleClickOrKeyEvent={handleKeyDown}
+          handleCloseEvent={handleCloseEvent}
         />
         <Grid container>
           <Grid container item xs>

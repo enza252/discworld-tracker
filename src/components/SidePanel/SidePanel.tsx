@@ -27,7 +27,7 @@ const sagas = [
 
 type SidePanelProps = {
   handleOrderByClick: Function
-  handleClickOrKeyEvent: Function
+  handleCloseEvent: Function
   open: boolean
   filter?: string
 }
@@ -35,14 +35,14 @@ type SidePanelProps = {
 const SidePanel: FunctionComponent<SidePanelProps> = ({
   handleOrderByClick,
   filter,
-  handleClickOrKeyEvent,
+  handleCloseEvent,
   open,
 }) => {
   return (
     <Box
       role="presentation"
-      onKeyDown={(e) => handleClickOrKeyEvent(e)}
-      onClick={(e) => handleClickOrKeyEvent(e)}
+      onKeyDown={(e) => handleCloseEvent(e)}
+      onClick={(e) => handleCloseEvent(e)}
       sx={{ width: "auto" }}
     >
       <Drawer
