@@ -8,6 +8,7 @@ import {
   Grid,
   IconButton,
   Tooltip,
+  Typography,
   useMediaQuery,
 } from "@mui/material"
 import { BookTiles } from "../BookTiles"
@@ -107,6 +108,25 @@ const AppPage: FunctionComponent = () => {
               </>
             ) : null}
           </Grid>
+          {
+            <Grid
+              container
+              item
+              xs={6}
+              alignContent="center"
+              justifyContent="center"
+            >
+              {isSmallScreen ? (
+                <Typography sx={{ fontSize: 10 }} color="text.secondary">
+                  {filter}
+                </Typography>
+              ) : (
+                <Typography sx={{ fontSize: 18 }} color="text.secondary">
+                  {filter && `Saga: ${filter}`}
+                </Typography>
+              )}
+            </Grid>
+          }
           <Grid container item justifyContent="flex-end" xs>
             <Button
               variant="contained"
