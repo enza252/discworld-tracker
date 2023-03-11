@@ -57,19 +57,18 @@ describe("tests the application", () => {
   })
 
   test("tests mobile responsiveness of the app", async () => {
-    window.matchMedia = jest.fn().mockImplementation(query => ({
-      matches: query !== '(min-width: 240px) and (max-width: 600px)',
-      media: '',
+    window.matchMedia = jest.fn().mockImplementation((query) => ({
+      matches: query !== "(min-width: 240px) and (max-width: 600px)",
+      media: "",
       onchange: null,
       addListener: jest.fn(),
-      removeListener: jest.fn()
-    }));
+      removeListener: jest.fn(),
+    }))
     render(<App />)
     expect(screen.getByTestId("icon-button-expand-more")).toBeInTheDocument()
     expect(screen.getByText("1. The Colour of Magic")).toBeInTheDocument()
     expect(screen.getByText("2. The Light Fantastic")).toBeInTheDocument()
     expect(screen.getByText("3. Equal Rites")).toBeInTheDocument()
     userEvent.click(screen.getByTestId("icon-button-expand-more"))
-
   })
 })

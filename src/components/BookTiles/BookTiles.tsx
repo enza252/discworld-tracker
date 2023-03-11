@@ -54,6 +54,7 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
               classes.root,
               selected?.includes(book.id) ? classes.selected : null
             )}
+            sx={{ minWidth: isSmallScreen ? "190px" : null, minHeight: isSmallScreen ? "80px" : null }}
           >
             <CardHeader
               title={
@@ -65,7 +66,9 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
             ></CardHeader>
             {isSmallScreen ? (
               <>
-                <Collapse in={expanded} unmountOnExit>{renderCardContent(book)}</Collapse>
+                <Collapse in={expanded} unmountOnExit>
+                  {renderCardContent(book)}
+                </Collapse>
               </>
             ) : (
               renderCardContent(book)
