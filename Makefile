@@ -1,14 +1,19 @@
+install:
+	yarn install
+
 run:
 	yarn start
 
 test:
+	yarn test
+
+testw:
 	yarn test:watch
 
 build:
 	yarn build
 
 qa: 
-	yarn test
 	yarn lint
 
 fix:
