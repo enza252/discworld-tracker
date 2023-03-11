@@ -54,13 +54,17 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
               classes.root,
               selected?.includes(book.id) ? classes.selected : null
             )}
-            sx={{ minWidth: isSmallScreen ? "190px" : null, minHeight: isSmallScreen ? "80px" : null }}
+            sx={{
+              minWidth: isSmallScreen ? "190px" : null,
+              minHeight: isSmallScreen ? "80px" : null,
+            }}
           >
             <CardHeader
               title={
                 <Typography sx={{ fontWeight: "bold" }}>
-                  {`${isSmallScreen ? `${book.publicationOrder.toString()}. ` : ""
-                    }${book.title}`}
+                  {`${
+                    isSmallScreen ? `${book.publicationOrder.toString()}. ` : ""
+                  }${book.title}`}
                 </Typography>
               }
             ></CardHeader>
