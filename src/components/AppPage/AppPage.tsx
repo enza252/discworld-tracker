@@ -2,9 +2,18 @@ import { FunctionComponent, useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 import { books } from "../../data"
 
-import { Box, Button, Grid, IconButton } from "@mui/material"
-import MenuIcon from "@mui/icons-material/Menu"
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Tooltip,
+  useMediaQuery,
+} from "@mui/material"
 import { BookTiles } from "../BookTiles"
+import MenuIcon from "@mui/icons-material/Menu"
+import ExpandMore from "@mui/icons-material/ExpandMore"
+import ExpandLess from "@mui/icons-material/ExpandLess"
 import { SidePanel } from "../SidePanel"
 
 import { DISCWORLD_TRACKER_COOKIE_NAME } from "../../constants"
@@ -14,6 +23,9 @@ const AppPage: FunctionComponent = () => {
   const [selected, setSelected] = useState<string[]>([])
   const [cookies, setCookie] = useCookies([DISCWORLD_TRACKER_COOKIE_NAME])
   const [showSidePanel, setShowSidePanel] = useState<boolean>(false)
+  const [expanded, setExpanded] = useState<boolean>(false)
+
+  const isSmallScreen = useMediaQuery("(max-width:600px)")
 
   useEffect(() => {
     if (
@@ -60,7 +72,6 @@ const AppPage: FunctionComponent = () => {
     }
     closeSidePanel()
   }
-
   return (
     <Box sx={{ flexGrow: 1, minWidth: "100%", minHeight: "100%" }}>
       <Grid container>
@@ -78,6 +89,23 @@ const AppPage: FunctionComponent = () => {
             >
               <MenuIcon />
             </IconButton>
+            {isSmallScreen ? (
+              <>
+                {!expanded ? (
+                  <Tooltip title="Expand book information">
+                    <IconButton onClick={() => setExpanded(true)}>
+                      <ExpandMore />
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Hide book information">
+                    <IconButton onClick={() => setExpanded(false)}>
+                      <ExpandLess />
+                    </IconButton>
+                  </Tooltip>
+                )}
+              </>
+            ) : null}
           </Grid>
           <Grid container item justifyContent="flex-end" xs>
             <Button
@@ -101,6 +129,8 @@ const AppPage: FunctionComponent = () => {
           filter={filter}
           handleTileClick={handleTileClick}
           selected={selected}
+          isSmallScreen={isSmallScreen}
+          expanded={expanded}
         />
       </Grid>
     </Box>

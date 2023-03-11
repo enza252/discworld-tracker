@@ -7,10 +7,10 @@ import {
   Button,
   Typography,
   CardHeader,
-  useMediaQuery,
   Collapse,
 } from "@mui/material"
 import { makeStyles } from "@mui/styles"
+
 import clsx from "clsx"
 
 const useStyles = makeStyles(() => ({
@@ -26,18 +26,21 @@ const useStyles = makeStyles(() => ({
 type BookTilesProps = {
   books: Book[]
   handleTileClick: Function
-  filter?: string
+  isSmallScreen: boolean
+  expanded: boolean
   selected?: string[]
+  filter?: string
 }
 
 const BookTiles: FunctionComponent<BookTilesProps> = ({
   books,
   handleTileClick,
+  isSmallScreen,
+  expanded,
   filter,
   selected,
 }) => {
   const classes = useStyles()
-  const isSmallScreen = useMediaQuery("(max-width:600px)")
 
   const renderTiles = (books: Book[]) => {
     return books.map((book) => (
@@ -62,7 +65,9 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
               }
             ></CardHeader>
             {isSmallScreen ? (
-              <Collapse>{renderCardContent(book)}</Collapse>
+              <>
+                <Collapse in={expanded}>{renderCardContent(book)}</Collapse>
+              </>
             ) : (
               renderCardContent(book)
             )}
