@@ -7,6 +7,8 @@ import {
   Button,
   Typography,
   CardHeader,
+  useMediaQuery,
+  Collapse,
 } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import clsx from "clsx"
@@ -35,6 +37,8 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
   selected,
 }) => {
   const classes = useStyles()
+  const isSmallScreen = useMediaQuery("(max-width:600px)")
+
   const renderTiles = (books: Book[]) => {
     return books.map((book) => (
       <Grid item key={book.id}>
@@ -51,26 +55,38 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
             <CardHeader
               title={
                 <Typography sx={{ fontWeight: "bold" }}>
-                  {book.title}
+                  {`${
+                    isSmallScreen ? `${book.publicationOrder.toString()}. ` : ""
+                  }${book.title}`}
                 </Typography>
               }
             ></CardHeader>
-            <CardContent>
-              <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                Saga:
-              </Typography>
-              <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                {book.saga}
-              </Typography>
-              <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                Publication Order:
-              </Typography>
-              <Typography gutterBottom>{book.publicationOrder}</Typography>
-            </CardContent>
+            {isSmallScreen ? (
+              <Collapse>{renderCardContent(book)}</Collapse>
+            ) : (
+              renderCardContent(book)
+            )}
           </Card>
         </Button>
       </Grid>
     ))
+
+    function renderCardContent(book: Book) {
+      return (
+        <CardContent>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary">
+            Saga:
+          </Typography>
+          <Typography sx={{ fontWeight: "bold" }} gutterBottom>
+            {book.saga}
+          </Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary">
+            Publication Order:
+          </Typography>
+          <Typography gutterBottom>{book.publicationOrder}</Typography>
+        </CardContent>
+      )
+    }
   }
 
   return (
