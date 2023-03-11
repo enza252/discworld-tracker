@@ -93,13 +93,13 @@ const AppPage: FunctionComponent = () => {
                 <>
                   {!expanded ? (
                     <Tooltip title="Expand book information">
-                      <IconButton onClick={() => setExpanded(true)}>
+                      <IconButton onClick={() => setExpanded(true)} data-testid="icon-button-expand-more">
                         <ExpandMore sx={{ color: "#fff" }} />
                       </IconButton>
                     </Tooltip>
                   ) : (
                     <Tooltip title="Hide book information">
-                      <IconButton onClick={() => setExpanded(false)}>
+                      <IconButton onClick={() => setExpanded(false)} data-testid="icon-button-expand-less">
                         <ExpandLess sx={{ color: "#fff" }} />
                       </IconButton>
                     </Tooltip>

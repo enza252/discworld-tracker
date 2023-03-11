@@ -58,15 +58,14 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
             <CardHeader
               title={
                 <Typography sx={{ fontWeight: "bold" }}>
-                  {`${
-                    isSmallScreen ? `${book.publicationOrder.toString()}. ` : ""
-                  }${book.title}`}
+                  {`${isSmallScreen ? `${book.publicationOrder.toString()}. ` : ""
+                    }${book.title}`}
                 </Typography>
               }
             ></CardHeader>
             {isSmallScreen ? (
               <>
-                <Collapse in={expanded}>{renderCardContent(book)}</Collapse>
+                <Collapse in={expanded} unmountOnExit>{renderCardContent(book)}</Collapse>
               </>
             ) : (
               renderCardContent(book)
