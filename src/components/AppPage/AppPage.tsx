@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useCookies } from "react-cookie"
 import { books } from "../../data"
 
-import { Box, Button, Grid, Paper, Typography } from "@mui/material"
+import { Box, Button, Grid } from "@mui/material"
 import { BookTiles } from "../BookTiles"
 import { SidePanel } from "../SidePanel"
 
@@ -14,7 +14,11 @@ const AppPage: React.FunctionComponent = () => {
   const [cookies, setCookie] = useCookies([DISCWORLD_TRACKER_COOKIE_NAME])
 
   React.useEffect(() => {
-    if (selected.length === 0 && cookies.discworldTracker && cookies.discworldTracker.length > 0) {
+    if (
+      selected.length === 0 &&
+      cookies.discworldTracker &&
+      cookies.discworldTracker.length > 0
+    ) {
       setSelected(cookies.discworldTracker)
     }
   }, [])
@@ -25,7 +29,6 @@ const AppPage: React.FunctionComponent = () => {
     }
     setFilter(saga)
   }
-
 
   const handleTileClick = (id: string) => {
     if (!selected.includes(id)) {
@@ -44,8 +47,18 @@ const AppPage: React.FunctionComponent = () => {
         <Grid item xs={10}>
           <Grid item xs={12}>
             <Grid container justifyContent="flex-end">
-              <Button variant="outlined" onClick={() => setCookie(DISCWORLD_TRACKER_COOKIE_NAME, selected, { path: "/" })}
-                disabled={selected.length === 0 || cookies?.discworldTracker?.sort() == selected.sort()}>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  setCookie(DISCWORLD_TRACKER_COOKIE_NAME, selected, {
+                    path: "/",
+                  })
+                }
+                disabled={
+                  selected.length === 0 ||
+                  cookies?.discworldTracker?.sort() === selected.sort()
+                }
+              >
                 Save
               </Button>
             </Grid>
