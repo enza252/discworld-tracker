@@ -72,7 +72,7 @@ const AppPage: FunctionComponent = () => {
         />
         <Grid container>
           <Grid container item xs>
-            <IconButton onClick={handleMenuIconClick}>
+            <IconButton onClick={handleMenuIconClick} data-testid="menu-icon-button">
               <MenuIcon />
             </IconButton>
           </Grid>

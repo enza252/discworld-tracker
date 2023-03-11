@@ -33,6 +33,7 @@ describe("tests the application", () => {
 
   test("tests the sagas are listed in the side panel and the filtering works", async () => {
     render(<App />)
+    await userEvent.click(screen.getByTestId("menu-icon-button"))
     sagas.forEach((s) => {
       expect(screen.getByTestId(`${s}-filter`)).toBeInTheDocument()
     })
