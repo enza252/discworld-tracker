@@ -27,15 +27,24 @@ const sagas = [
 
 type SidePanelProps = {
   handleOrderByClick: Function
+  handleCloseEvent: Function
+  open: boolean
   filter?: string
 }
 
 const SidePanel: FunctionComponent<SidePanelProps> = ({
   handleOrderByClick,
   filter,
+  handleCloseEvent,
+  open,
 }) => {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      role="presentation"
+      onKeyDown={(e) => handleCloseEvent(e)}
+      onClick={(e) => handleCloseEvent(e)}
+      sx={{ width: "auto" }}
+    >
       <Drawer
         sx={{
           width: drawerWidth,
@@ -45,8 +54,9 @@ const SidePanel: FunctionComponent<SidePanelProps> = ({
             boxSizing: "border-box",
           },
         }}
-        variant="permanent"
+        variant="temporary"
         anchor="left"
+        open={open}
       >
         <List>
           <ListItem disablePadding>
@@ -58,6 +68,7 @@ const SidePanel: FunctionComponent<SidePanelProps> = ({
               <ListItemText primary="View by Publication Date" />
             </ListItemButton>
           </ListItem>
+          <Divider />
           <ListItem>
             <ListItemText>
               <Typography sx={{ fontSize: 14 }} color="text.secondary">
