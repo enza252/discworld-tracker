@@ -28,11 +28,13 @@ const sagas = [
 type SidePanelProps = {
   handleOrderByClick: Function
   filter?: string
+  open?: boolean
 }
 
 const SidePanel: FunctionComponent<SidePanelProps> = ({
   handleOrderByClick,
   filter,
+  open
 }) => {
   return (
     <Box sx={{ display: "flex" }}>
@@ -45,8 +47,9 @@ const SidePanel: FunctionComponent<SidePanelProps> = ({
             boxSizing: "border-box",
           },
         }}
-        variant="permanent"
+        variant="temporary"
         anchor="left"
+        open={open}
       >
         <List>
           <ListItem disablePadding>
@@ -58,8 +61,9 @@ const SidePanel: FunctionComponent<SidePanelProps> = ({
               <ListItemText primary="View by Publication Date" />
             </ListItemButton>
           </ListItem>
+          <Divider />
           <ListItem>
-            <ListItemText>
+            <ListItemText >
               <Typography sx={{ fontSize: 14 }} color="text.secondary">
                 View by Saga:
               </Typography>

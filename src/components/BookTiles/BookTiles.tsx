@@ -13,7 +13,7 @@ import clsx from "clsx"
 
 const useStyles = makeStyles(() => ({
   root: {
-    width: "100%",
+    maxWidth: '200px',
     height: "100%",
   },
   selected: {
@@ -37,7 +37,7 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
   const classes = useStyles()
   const renderTiles = (books: Book[]) => {
     return books.map((book) => (
-      <Grid item xs={2} key={book.id}>
+      <Grid item key={book.id}>
         <Button
           className={classes.root}
           onClick={() => handleTileClick(book.id)}
@@ -79,6 +79,7 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
       direction="row"
       spacing={2}
       justifyContent="stretch"
+      alignContent="center"
       alignItems="stretch"
     >
       {filter

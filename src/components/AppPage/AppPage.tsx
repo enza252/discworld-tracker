@@ -45,34 +45,28 @@ const AppPage: FunctionComponent = () => {
         <Grid item xs={2}>
           <SidePanel handleOrderByClick={handleOrderByClick} filter={filter} />
         </Grid>
-        <Grid item xs={10}>
-          <Grid item xs={12}>
-            <Grid container justifyContent="flex-end">
-              <Button
-                variant="contained"
-                onClick={() =>
-                  setCookie(DISCWORLD_TRACKER_COOKIE_NAME, selected, {
-                    path: "/",
-                  })
-                }
-                disabled={
-                  selected.length === 0 ||
-                  cookies?.discworldTracker?.sort() === selected.sort()
-                }
-              >
-                Save
-              </Button>
-            </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            <BookTiles
-              books={books}
-              filter={filter}
-              handleTileClick={handleTileClick}
-              selected={selected}
-            />
-          </Grid>
+        <Grid container justifyContent="flex-end">
+          <Button
+            variant="contained"
+            onClick={() =>
+              setCookie(DISCWORLD_TRACKER_COOKIE_NAME, selected, {
+                path: "/",
+              })
+            }
+            disabled={
+              selected.length === 0 ||
+              cookies?.discworldTracker?.sort() === selected.sort()
+            }
+          >
+            Save
+          </Button>
         </Grid>
+        <BookTiles
+          books={books}
+          filter={filter}
+          handleTileClick={handleTileClick}
+          selected={selected}
+        />
       </Grid>
     </Box>
   )
