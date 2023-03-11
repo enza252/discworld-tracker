@@ -27,17 +27,24 @@ const sagas = [
 
 type SidePanelProps = {
   handleOrderByClick: Function
+  handleClickOrKeyEvent: Function
+  open: boolean
   filter?: string
-  open?: boolean
 }
 
 const SidePanel: FunctionComponent<SidePanelProps> = ({
   handleOrderByClick,
   filter,
-  open
+  handleClickOrKeyEvent,
+  open,
 }) => {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      role="presentation"
+      onKeyDown={(e) => handleClickOrKeyEvent(e)}
+      onClick={(e) => handleClickOrKeyEvent(e)}
+      sx={{ width: "auto" }}
+    >
       <Drawer
         sx={{
           width: drawerWidth,
@@ -63,7 +70,7 @@ const SidePanel: FunctionComponent<SidePanelProps> = ({
           </ListItem>
           <Divider />
           <ListItem>
-            <ListItemText >
+            <ListItemText>
               <Typography sx={{ fontSize: 14 }} color="text.secondary">
                 View by Saga:
               </Typography>

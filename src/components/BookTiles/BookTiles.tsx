@@ -13,7 +13,7 @@ import clsx from "clsx"
 
 const useStyles = makeStyles(() => ({
   root: {
-    maxWidth: '200px',
+    maxWidth: "200px",
     height: "100%",
   },
   selected: {
@@ -78,7 +78,7 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
       container
       direction="row"
       spacing={2}
-      justifyContent="stretch"
+      justifyContent="center"
       alignContent="center"
       alignItems="stretch"
     >
