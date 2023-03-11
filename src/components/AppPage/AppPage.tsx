@@ -3,10 +3,12 @@ import { useCookies } from "react-cookie"
 import { books } from "../../data"
 
 import {
+  AppBar,
   Box,
   Button,
   Grid,
   IconButton,
+  Toolbar,
   Tooltip,
   Typography,
   useMediaQuery,
@@ -74,76 +76,74 @@ const AppPage: FunctionComponent = () => {
     closeSidePanel()
   }
   return (
-    <Box sx={{ flexGrow: 1, minWidth: "100%", minHeight: "100%" }}>
-      <Grid container>
-        <SidePanel
-          handleOrderByClick={handleOrderByClick}
-          filter={filter}
-          open={showSidePanel}
-          handleCloseEvent={handleCloseEvent}
-        />
-        <Grid container>
-          <Grid container item xs>
-            <IconButton
-              onClick={handleMenuIconClick}
-              data-testid="menu-icon-button"
-            >
-              <MenuIcon />
-            </IconButton>
-            {isSmallScreen ? (
-              <>
-                {!expanded ? (
-                  <Tooltip title="Expand book information">
-                    <IconButton onClick={() => setExpanded(true)}>
-                      <ExpandMore />
-                    </IconButton>
-                  </Tooltip>
-                ) : (
-                  <Tooltip title="Hide book information">
-                    <IconButton onClick={() => setExpanded(false)}>
-                      <ExpandLess />
-                    </IconButton>
-                  </Tooltip>
-                )}
-              </>
-            ) : null}
-          </Grid>
-          {
-            <Grid
-              container
-              item
-              xs={6}
-              alignContent="center"
-              justifyContent="center"
-            >
+    <>
+      <Grid container item>
+        <AppBar position="fixed" color="primary">
+          <Toolbar>
+            <Grid container item xs>
+              <IconButton
+                onClick={handleMenuIconClick}
+                data-testid="menu-icon-button"
+              >
+                <MenuIcon />
+              </IconButton>
               {isSmallScreen ? (
-                <Typography sx={{ fontSize: 10 }} color="text.secondary">
-                  {filter}
-                </Typography>
-              ) : (
-                <Typography sx={{ fontSize: 18 }} color="text.secondary">
-                  {filter && `Saga: ${filter}`}
-                </Typography>
-              )}
+                <>
+                  {!expanded ? (
+                    <Tooltip title="Expand book information">
+                      <IconButton onClick={() => setExpanded(true)}>
+                        <ExpandMore />
+                      </IconButton>
+                    </Tooltip>
+                  ) : (
+                    <Tooltip title="Hide book information">
+                      <IconButton onClick={() => setExpanded(false)}>
+                        <ExpandLess />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                </>
+              ) : null}
             </Grid>
-          }
-          <Grid container item justifyContent="flex-end" xs>
-            <Button
-              variant="contained"
-              onClick={() =>
-                setCookie(DISCWORLD_TRACKER_COOKIE_NAME, selected, {
-                  path: "/",
-                })
-              }
-              disabled={
-                selected.length === 0 ||
-                cookies?.discworldTracker?.sort() === selected.sort()
-              }
-            >
-              Save
-            </Button>
-          </Grid>
-        </Grid>
+            {
+              <Grid
+                container
+                item
+                xs={6}
+                alignContent="center"
+                justifyContent="center"
+              >
+                {isSmallScreen ? (
+                  <Typography sx={{ fontSize: 10 }} color="text.secondary">
+                    {filter}
+                  </Typography>
+                ) : (
+                  <Typography sx={{ fontSize: 18 }} color="text.secondary">
+                    {filter && `Saga: ${filter}`}
+                  </Typography>
+                )}
+              </Grid>
+            }
+            <Grid container item justifyContent="flex-end" xs>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  setCookie(DISCWORLD_TRACKER_COOKIE_NAME, selected, {
+                    path: "/",
+                  })
+                }
+                disabled={
+                  selected.length === 0 ||
+                  cookies?.discworldTracker?.sort() === selected.sort()
+                }
+              >
+                Save
+              </Button>
+            </Grid>
+          </Toolbar>
+        </AppBar>
+      </Grid>
+      <Grid container sx={{ marginTop: isSmallScreen ? "54px" : "64px" }}>
         <BookTiles
           books={books}
           filter={filter}
@@ -153,7 +153,13 @@ const AppPage: FunctionComponent = () => {
           expanded={expanded}
         />
       </Grid>
-    </Box>
+      <SidePanel
+        handleOrderByClick={handleOrderByClick}
+        filter={filter}
+        open={showSidePanel}
+        handleCloseEvent={handleCloseEvent}
+      />
+    </>
   )
 }
 
