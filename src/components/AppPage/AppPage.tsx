@@ -4,7 +4,6 @@ import { books } from "../../data"
 
 import {
   AppBar,
-  Box,
   Button,
   Grid,
   IconButton,
@@ -75,30 +74,33 @@ const AppPage: FunctionComponent = () => {
     }
     closeSidePanel()
   }
+  const isSaveButtonDisabled =
+    selected.length === 0 ||
+    cookies?.discworldTracker?.sort() === selected.sort()
   return (
     <>
       <Grid container item>
-        <AppBar position="fixed" color="primary">
-          <Toolbar>
+        <AppBar position="fixed">
+          <Toolbar sx={{ backgroundColor: "#004ba5" }}>
             <Grid container item xs>
               <IconButton
                 onClick={handleMenuIconClick}
                 data-testid="menu-icon-button"
               >
-                <MenuIcon />
+                <MenuIcon sx={{ color: "#fff" }} />
               </IconButton>
               {isSmallScreen ? (
                 <>
                   {!expanded ? (
                     <Tooltip title="Expand book information">
                       <IconButton onClick={() => setExpanded(true)}>
-                        <ExpandMore />
+                        <ExpandMore sx={{ color: "#fff" }} />
                       </IconButton>
                     </Tooltip>
                   ) : (
                     <Tooltip title="Hide book information">
                       <IconButton onClick={() => setExpanded(false)}>
-                        <ExpandLess />
+                        <ExpandLess sx={{ color: "#fff" }} />
                       </IconButton>
                     </Tooltip>
                   )}
@@ -113,12 +115,13 @@ const AppPage: FunctionComponent = () => {
                 alignContent="center"
                 justifyContent="center"
               >
+                {!filter && <Typography>Discworld Tracker</Typography>}
                 {isSmallScreen ? (
-                  <Typography sx={{ fontSize: 10 }} color="text.secondary">
-                    {filter}
+                  <Typography sx={{ fontSize: 12, color: "#fff" }}>
+                    {filter && `Saga: ${filter}`}
                   </Typography>
                 ) : (
-                  <Typography sx={{ fontSize: 18 }} color="text.secondary">
+                  <Typography sx={{ fontSize: 18, color: "#fff" }}>
                     {filter && `Saga: ${filter}`}
                   </Typography>
                 )}
@@ -127,15 +130,17 @@ const AppPage: FunctionComponent = () => {
             <Grid container item justifyContent="flex-end" xs>
               <Button
                 variant="contained"
+                sx={{
+                  color: "#fff",
+                  backgroundColor: "#00b545",
+                  border: !isSaveButtonDisabled ? "1px solid white" : null,
+                }}
                 onClick={() =>
                   setCookie(DISCWORLD_TRACKER_COOKIE_NAME, selected, {
                     path: "/",
                   })
                 }
-                disabled={
-                  selected.length === 0 ||
-                  cookies?.discworldTracker?.sort() === selected.sort()
-                }
+                disabled={isSaveButtonDisabled}
               >
                 Save
               </Button>
