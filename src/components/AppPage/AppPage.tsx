@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 import { books } from "../../data"
 
-import { Grid, useMediaQuery } from "@mui/material"
+import { useMediaQuery } from "@mui/material"
 import { BookTiles } from "../BookTiles"
 
 import { SidePanel } from "../SidePanel"
