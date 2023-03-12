@@ -82,7 +82,7 @@ const AppPage: FunctionComponent = () => {
       <Grid container item>
         <AppBar position="fixed">
           <Toolbar sx={{ backgroundColor: "#004ba5" }}>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <IconButton
                 onClick={handleMenuIconClick}
                 data-testid="menu-icon-button"
