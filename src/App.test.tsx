@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { render, screen, waitFor } from "@testing-library/react"
 import { Saga } from "./types"
 import App from "./App"
 import userEvent from "@testing-library/user-event"
@@ -69,6 +69,17 @@ describe("tests the application", () => {
     expect(screen.getByText("1. The Colour of Magic")).toBeInTheDocument()
     expect(screen.getByText("2. The Light Fantastic")).toBeInTheDocument()
     expect(screen.getByText("3. Equal Rites")).toBeInTheDocument()
+    expect(screen.getByTestId("icon-button-expand-more")).toBeEnabled()
     userEvent.click(screen.getByTestId("icon-button-expand-more"))
+    await waitFor(() => {
+      expect(screen.getByTestId("icon-button-expand-less")).toBeEnabled()
+    })
+    // Expanded cards should now be visible
+    expect(screen.getAllByText("Saga:").length).toStrictEqual(41)
+    expect(screen.getAllByText("Publication Order:").length).toStrictEqual(41)
+    userEvent.click(screen.getByTestId("icon-button-expand-less"))
+    await waitFor(() => {
+      expect(screen.getByTestId("icon-button-expand-more")).toBeEnabled()
+    })
   })
 })

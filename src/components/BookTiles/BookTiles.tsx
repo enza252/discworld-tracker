@@ -42,6 +42,23 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
 }) => {
   const classes = useStyles()
 
+  const renderCardContent = (book: Book) => {
+    return (
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary">
+          Saga:
+        </Typography>
+        <Typography sx={{ fontWeight: "bold" }} gutterBottom>
+          {book.saga}
+        </Typography>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary">
+          Publication Order:
+        </Typography>
+        <Typography gutterBottom>{book.publicationOrder}</Typography>
+      </CardContent>
+    )
+  }
+
   const renderTiles = (books: Book[]) => {
     return books.map((book) => (
       <Grid item key={book.id}>
@@ -81,23 +98,6 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
         </Button>
       </Grid>
     ))
-
-    function renderCardContent(book: Book) {
-      return (
-        <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary">
-            Saga:
-          </Typography>
-          <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-            {book.saga}
-          </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary">
-            Publication Order:
-          </Typography>
-          <Typography gutterBottom>{book.publicationOrder}</Typography>
-        </CardContent>
-      )
-    }
   }
 
   return (
@@ -108,6 +108,7 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
       justifyContent="center"
       alignContent="center"
       alignItems="stretch"
+      sx={{ marginTop: isSmallScreen ? "54px" : "64px" }}
     >
       {filter
         ? renderTiles(books.filter((book) => book.saga === filter))
