@@ -69,28 +69,24 @@ const AppPage: FunctionComponent = () => {
     cookies?.discworldTracker?.sort() === selected.sort()
   return (
     <>
-      <Grid container item>
-        <AppBar
-          handleMenuIconClick={handleMenuIconClick}
-          isSmallScreen={isSmallScreen}
-          expanded={expanded}
-          setExpanded={setExpanded}
-          filter={filter}
-          isSaveButtonDisabled={isSaveButtonDisabled}
-          setCookie={setCookie}
-          selected={selected}
-        />
-      </Grid>
-      <Grid container sx={{ marginTop: isSmallScreen ? "54px" : "64px" }}>
-        <BookTiles
-          books={books}
-          filter={filter}
-          handleTileClick={handleTileClick}
-          selected={selected}
-          isSmallScreen={isSmallScreen}
-          expanded={expanded}
-        />
-      </Grid>
+      <AppBar
+        handleMenuIconClick={handleMenuIconClick}
+        isSmallScreen={isSmallScreen}
+        expanded={expanded}
+        setExpanded={setExpanded}
+        filter={filter}
+        isSaveButtonDisabled={isSaveButtonDisabled}
+        setCookie={setCookie}
+        selected={selected}
+      />
+      <BookTiles
+        books={books}
+        filter={filter}
+        handleTileClick={handleTileClick}
+        selected={selected}
+        isSmallScreen={isSmallScreen}
+        expanded={expanded}
+      />
       <SidePanel
         handleOrderByClick={handleOrderByClick}
         filter={filter}

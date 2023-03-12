@@ -108,6 +108,7 @@ const BookTiles: FunctionComponent<BookTilesProps> = ({
       justifyContent="center"
       alignContent="center"
       alignItems="stretch"
+      sx={{ marginTop: isSmallScreen ? "54px" : "64px" }}
     >
       {filter
         ? renderTiles(books.filter((book) => book.saga === filter))
